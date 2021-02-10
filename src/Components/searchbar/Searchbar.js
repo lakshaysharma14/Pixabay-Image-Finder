@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Select from '../selectbar/Selectbar';
-import Image from '../Image-Results/Image';
+import Image1 from '../Image-Results/Image1';
 import axios from 'axios';
 
 class Searchbar extends Component 
@@ -9,7 +9,7 @@ class Searchbar extends Component
     state = 
     {
         searchText:"",
-        amount:15,
+        amount:5,
         apiUrl:'https://pixabay.com/api',
         apiKey:'20204642-6fe3ca626d650b4937d55a064',
         images:[]
@@ -17,16 +17,25 @@ class Searchbar extends Component
     
     //Here we are passing callback function after setting the state to fetch images
     handletextChange = (e) => {
-        this.setState({ [e.target.name]:e.target.value}, ()=>{
+        const val =e.target.value
+        this.setState({ [e.target.name]:val}, ()=>{
+            if(val ==="")
+            { this.setState({images:[]}) }
+            else
+            {
+                axios.get(`${this.state.apiUrl}/?key=${this.state.apiKey}&q=${this.state.searchText}
+                         &image_type=photo&per_page=${this.state.amount}&safesearch=false`)
+                         .then(res => this.setState({images:res.data.hits}))
+                         .catch(err => console.log(err));
+            } 
+        })
+    }
+    handleamountChange = (no_of_images) =>{
+        this.setState({ amount:no_of_images} , ()=>{
             axios.get(`${this.state.apiUrl}/?key=${this.state.apiKey}&q=${this.state.searchText}
                          &image_type=photo&per_page=${this.state.amount}&safesearch=false`)
                          .then(res => this.setState({images:res.data.hits}))
                          .catch(err => console.log(err));
-        })
-    }
-    handleamountChange = (no_of_images) =>{
-        this.setState({
-            amount:no_of_images
         })
     }
     render() 
@@ -42,10 +51,10 @@ class Searchbar extends Component
                 fullWidth={true}              
                 /> 
                 <br />
-                <Select searchbarCallback = {this.handleamountChange} />
+                <Select searchbarCallback = {this.handleamountChange} amnt={this.state.amount} />
                 <br />
                 {this.state.images.length > 0 ? 
-                <Image images={this.state.images}/>:
+                <Image1 images={this.state.images}/>:
                 null}
             </div>
         )

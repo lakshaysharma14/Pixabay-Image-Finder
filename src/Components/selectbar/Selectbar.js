@@ -4,7 +4,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -21,7 +20,7 @@ const Selectbar = (props) =>
 {
   //console.log(props)
   const classes = useStyles();
-  const [images, setImage] = React.useState('');
+  const [images, setImage] = React.useState(props.amnt);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
@@ -39,9 +38,6 @@ const Selectbar = (props) =>
 
   return (
     <div>
-      <Button className={classes.button} onClick={handleOpen}>
-        Choose No of Images You Want
-      </Button>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">No. of Images</InputLabel>
         <Select

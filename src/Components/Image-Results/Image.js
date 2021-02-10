@@ -7,10 +7,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-//import tileData from './tileData';
-
 //import { Dialog } from '@material-ui/core';
-//import { GridTile } from 'material-ui';
 
 class Image extends Component 
 {
@@ -18,6 +15,7 @@ class Image extends Component
     {
         let imageList;
         const {images} = this.props;
+       
         // const useStyles = makeStyles((theme) => ({
         //     root: {
         //       display: 'flex',
@@ -37,17 +35,17 @@ class Image extends Component
 
         if(images)
         {
-            // const classes = useStyles();
+           // const classes = useStyles();
             imageList = (
-                // <div className={classes.root}>
+                //<div className={classes.root}>
                 <div>
                 <GridList cellHeight={180} >
                     <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                        <ListSubheader component="div">Image Result</ListSubheader>
+                        <ListSubheader component="div"><strong><b>Image Result</b></strong></ListSubheader>
                     </GridListTile>
                     
                     {images.map((tile) => (
-                    <GridListTile key={tile.img}>
+                    <GridListTile key={tile.id}>
                         <img src= {tile.largeImageURL} alt="" />
                         <GridListTileBar
                         title={tile.tags}
@@ -63,30 +61,7 @@ class Image extends Component
                 </GridList>
             </div>
         )
-
-            // imageList = (
-            //     <GridList col={3}> 
-            //         {images.map(img => (
-            //             <GridListTile key={img.id}> 
-            //                  <GridListTileBar>
-            //                     <img src= {img.largeImageURL} alt="" />
-            //                     title = {img.tags}
-            //                     subtitle={
-            //                         <span>
-            //                             by <strong>{img.user}</strong>
-            //                         </span>
-            //                     }
-            //                     actionIcon = {
-            //                         <IconButton>
-            //                         <ZoomInIcon color="white"></ZoomInIcon> 
-            //                         </IconButton>
-            //                     }
-            //                 </GridListTileBar>
-            //             </GridListTile>  
-            //         ))}
-            //     </GridList>
-           // )
-        }
+    }
     else
     {
         imageList = null;
@@ -102,4 +77,4 @@ class Image extends Component
 Image.propTypes = {
     images:PropTypes.array.isRequired
 }
-export default Image
+export default Image;
