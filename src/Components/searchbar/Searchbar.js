@@ -11,7 +11,7 @@ class Searchbar extends Component
         searchText:"",
         amount:5,
         apiUrl:'https://pixabay.com/api',
-        apiKey:'20204642-6fe3ca626d650b4937d55a064',
+        apiKey:'',
         images:[]
     }
     
